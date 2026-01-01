@@ -29,12 +29,19 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](<./assets/images/Screenshot%20(932).png>)
+![](<./assets/images/Screenshot%20(933).png>)
+![](<./assets/images/Screenshot%20(934).png>)
+![](<./assets/images/Screenshot%20(935).png>)
+![](<./assets/images/Screenshot%20(936).png>)
+![](<./assets/images/Screenshot%20(937).png>)
+![](<./assets/images/Screenshot%20(938).png>)
+![](<./assets/images/Screenshot%20(939).png>)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Frontendmentor Extensions](https://frontendmentor-extensions-list.vercel.app)
 
 ## My process
 
