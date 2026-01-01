@@ -1,0 +1,466 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ======================================================
+   RESET
+====================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5% /* 1rem = 10px */;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg: #0f172a;
+    --color-surface: #020617;
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #94a3b8;
+  }
+}
+
+/* ======================================================
+   1. PRIMITIVE / PALETTE TOKENS (NEVER CHANGE)
+====================================================== */
+:root {
+  /* Neutral */
+  --neutral-900: hsl(227, 75%, 14%);
+  --neutral-800: hsl(226, 25%, 17%);
+  --neutral-700: hsl(225, 23%, 24%);
+  --neutral-600: hsl(226, 11%, 37%);
+  --neutral-300: hsl(0, 0%, 78%);
+  --neutral-200: hsl(217, 61%, 90%);
+  --neutral-100: hsl(0, 0%, 93%);
+  --neutral-50: hsl(200, 60%, 99%);
+
+  /* Accent */
+  --red-400: hsl(3, 86%, 64%);
+  --red-500: hsl(3, 71%, 56%);
+  --red-700: hsl(3, 77%, 44%);
+
+  /* Gradient */
+  --gradient-light: linear-gradient(180deg, #ebf2fc 0%, #eef8f9 100%);
+  --gradient-dark: linear-gradient(180deg, #040918 0%, #091540 100%);
+
+  /* Typography */
+  --font-family-base: "Noto Sans", sans-serif;
+  --font-size-base: 1rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height-base: 1.5;
+}
+
+/* ======================================================
+   2. GRID TOKENS (USED BY LAYOUT)
+====================================================== */
+:root {
+  /* 4px grid */
+  /* Spacing */
+  --space-grid: 0.4rem;
+  --space-100: calc(var(--space-grid) * 1);
+  --space-200: calc(var(--space-grid) * 2);
+  --space-300: calc(var(--space-grid) * 3);
+  --space-400: calc(var(--space-grid) * 4);
+  --space-500: calc(var(--space-grid) * 5);
+  --space-600: calc(var(--space-grid) * 6);
+  --space-700: calc(var(--space-grid) * 7);
+  --space-800: calc(var(--space-grid) * 8);
+  --space-900: calc(var(--space-grid) * 9);
+  --space-1000: calc(var(--space-grid) * 10);
+  --space-1100: calc(var(--space-grid) * 11);
+  --space-1200: calc(var(--space-grid) * 12);
+  --space-1300: calc(var(--space-grid) * 13);
+  --space-1400: calc(var(--space-grid) * 14);
+  --space-1500: calc(var(--space-grid) * 15);
+
+  --space-xs: var(--space-100);
+  --space-sm: var(--space-200);
+  --space-md: var(--space-300);
+  --space-lg: var(--space-400);
+
+  /* Radius */
+  --radius-sm: var(--space-sm);
+  --radius-md: var(--space-md);
+  --radius-lg: var(--space-lg);
+  --radius-pill: 100vmax;
+
+  /* Transition */
+  --transition-fast: 0.15s ease;
+}
+
+/* ======================================================
+   2. SEMANTIC TOKENS (USED BY COMPONENTS)
+====================================================== */
+:root {
+  /* Text */
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-600);
+  --color-text-inverse: var(--neutral-100);
+
+  /* Backgrounds */
+  --color-bg-page: var(--gradient-light);
+  --color-bg-surface-1: var(--neutral-50);
+  --color-bg-surface-2: var(--neutral-100);
+
+  /* Borders */
+  --color-border-default: var(--neutral-200);
+
+  /* Accent / Actions */
+  --color-accent: var(--red-500);
+  --color-accent-hover: var(--red-700);
+
+  /* Toggles */
+  --color-toggle-bg: var(--neutral-300);
+  --color-toggle-thumb: #fff;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+/* ======================================================
+   3. THEMES (ONLY VARIABLE OVERRIDES)
+====================================================== */
+html[data-theme="dark"] {
+  --color-text-primary: var(--neutral-100);
+  --color-text-secondary: var(--neutral-300);
+  --color-text-inverse: var(--neutral-900);
+
+  --color-bg-page: var(--gradient-dark);
+  --color-bg-surface-1: var(--neutral-800);
+  --color-bg-surface-2: var(--neutral-700);
+
+  --color-border-default: var(--neutral-700);
+
+  --color-toggle-bg: var(--neutral-600);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .nav__theme-toggler:hover {
+  background-color: var(--neutral-600);
+}
+html[data-theme="dark"] .nav__theme-icon--sun {
+  display: block;
+}
+html[data-theme="dark"] .nav__theme-icon--moon {
+  display: none;
+}
+.nav__theme-icon--sun {
+  display: none;
+}
+/* ======================================================
+   BASE
+====================================================== */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  line-height: var(--line-height-base);
+  padding: var(--space-lg) 0;
+  min-height: 100vh;
+}
+
+/* ======================================================
+   LAYOUT
+====================================================== */
+.container {
+  max-width: 100rem;
+  padding-inline: var(--space-md);
+  margin-inline: auto;
+}
+.flow > * + * {
+  margin-top: var(--space-lg);
+}
+.flow-sm > * + * {
+  margin-top: var(--space-md);
+}
+.flow-xs > * + * {
+  margin-top: var(--space-sm);
+}
+
+.header {
+  margin-bottom: var(--space-500);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ======================================================
+   UTILITIES
+====================================================== */
+.show {
+  display: block !important;
+}
+.hide {
+  display: none !important;
+}
+
+/* ======================================================
+   NAVBAR
+====================================================== */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-surface-1);
+  border: 1px solid var(--color-border-default);
+  margin-bottom: var(--space-1000);
+  box-shadow: var(--shadow-sm);
+}
+.nav__logo {
+  width: 100px;
+  height: auto;
+}
+
+html[data-theme="dark"] .nav__logo path:nth-child(2) {
+  fill: #fff;
+}
+
+.nav__title {
+  font-weight: 600;
+}
+
+.nav__theme-toggler {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  background-color: var(--color-bg-surface-2);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+.nav__theme-toggler:hover {
+  background-color: var(--neutral-200);
+}
+.nav__theme-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ======================================================
+   TABS
+====================================================== */
+.tabs {
+  display: flex;
+  gap: var(--space-200);
+}
+.tabs__button,
+button {
+  background: var(--color-bg-surface-1);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+  line-height: 1;
+  font-size: 1.35rem;
+}
+.tabs__button {
+  box-shadow: var(--shadow-sm);
+}
+.tabs__button--active {
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+/* ======================================================
+   EXTENSION GRID
+====================================================== */
+.extensions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+.extensions-list--empty {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  display: block;
+  padding: var(--space-800) 0;
+  background-color: var(--color-bg-surface-1);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ======================================================
+   EXTENSION CARD
+====================================================== */
+.extension-item {
+  background-color: var(--color-bg-surface-1);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-900);
+  box-shadow: var(--shadow-sm);
+}
+.extension-item__info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-md);
+  align-items: start;
+}
+.extension-item__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+}
+
+.extension-item__name {
+  font-weight: 600;
+}
+
+.extension-item__description {
+  color: var(--color-text-secondary);
+  font-size: 1.2rem;
+}
+
+/* ======================================================
+   CARD ACTIONS
+====================================================== */
+.extension-item__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+.button {
+  cursor: pointer;
+  background: none;
+  color: var(--color-text-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.button:hover {
+  background-color: var(--color-bg-surface-2);
+}
+
+.btn--danger {
+  background-color: var(--red-500);
+  color: #fff;
+  border: 1px solid var(--red-500);
+  transition: background-color var(--transition-fast);
+}
+
+/* ======================================================
+   TOGGLE SWITCH
+====================================================== */
+.switch {
+  /* === Single source of truth === */
+  --size: 3.2rem;
+
+  /* Derived values */
+  --track-height: calc(var(--size) / 1.8);
+  --padding: calc(var(--size) / 12);
+  --thumb-size: calc(var(--track-height) - var(--padding) * 2);
+  --translate-x: calc(var(--size) - var(--thumb-size) - var(--padding) * 2);
+
+  position: relative;
+  width: var(--size);
+  height: var(--track-height);
+  padding: var(--padding);
+
+  display: flex;
+  align-items: center;
+
+  background-color: var(--color-toggle-bg);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.switch::after {
+  content: "";
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+
+  background-color: var(--color-toggle-thumb);
+  border-radius: 50%;
+
+  transform: translateX(0);
+  transition: transform var(--transition-fast);
+}
+
+/* Active state */
+.switch[data-active="true"] {
+  background-color: var(--color-accent);
+}
+
+.switch[data-active="true"]::after {
+  transform: translateX(var(--translate-x));
+}
+
+/* ======================================================
+   MODAL
+====================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal__content {
+  background-color: var(--color-bg-surface-1);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.modal__close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+.modal__title {
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+.modal__body {
+  font-size: 1.3rem;
+  color: var(--color-text-primary);
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.modal--warning .modal__title {
+  color: var(--red-500);
+}
