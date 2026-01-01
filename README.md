@@ -27,7 +27,7 @@ Users should be able to:
 - View the optimal layout for the interface depending on their device's screen size.
 - See hover and focus states for all interactive elements on the page.
 
-### Screenshot
+### Screenshots
 
 ![](<./assets/images/Screenshot%20(932).png>)
 ![](<./assets/images/Screenshot%20(933).png>)
@@ -37,6 +37,10 @@ Users should be able to:
 ![](<./assets/images/Screenshot%20(937).png>)
 ![](<./assets/images/Screenshot%20(938).png>)
 ![](<./assets/images/Screenshot%20(939).png>)
+
+### Video Demo
+
+![](./assets/bandicam%202026-01-01%2009-00-56-789.mp4)
 
 ### Links
 
