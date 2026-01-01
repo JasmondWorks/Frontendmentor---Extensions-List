@@ -82,6 +82,36 @@ function renderExtensionItem(item) {
     </div>
     `;
 }
+function renderRemoveExtensionModal(item) {
+  const { name, logo } = item;
+  return `
+  <div class="modal__content">
+    <div class="modal__extension-details">
+      <h3 class="modal__extension-name">${name}</h3>
+      <img src="${logo}" alt="devlens logo" />
+    </div>
+    <button class="modal__close-btn js-modal-close-btn">&times;</button>
+    <h2 class="modal__title">
+      Are you sure you want to remove this extension?
+    </h2>
+    <div class="modal__body">
+      <p class="text-muted">
+        This action cannot be undone. Be sure to cross-check before
+        proceeding.
+      </p>
+      <div class="modal__actions">
+        <button
+          class="btn btn--secondary js-modal-cancel-btn js-modal-close-btn"
+        >
+          Cancel
+        </button>
+        <button class="btn btn--danger js-modal-confirm-btn">Remove</button>
+      </div>
+      <!-- Extension details will be populated here -->
+    </div>
+  </div>
+  `;
+}
 
 extensionsList.addEventListener("click", (e) => {
   const target = e.target;
@@ -105,8 +135,11 @@ extensionsList.addEventListener("click", (e) => {
 
   if (target.classList.contains("button") && target.textContent === "Remove") {
     modal.classList.remove("hide");
+    
+    const itemInArray = list.find((extension => extension.name === item.querySelector(".extension-item__name").textContent));
+    selectedExtension = itemInArray;
 
-    selectedExtension = item;
+    modal.innerHTML = renderRemoveExtensionModal(itemInArray);
   }
 });
 
@@ -145,20 +178,21 @@ modalCloseBtns.forEach((btn) => {
 
 // Modal overlay click to close
 modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
+  const target = e.target;
+  if (target === modal) {
     modal.classList.add("hide");
   }
-});
 
-modalConfirmBtn.addEventListener("click", () => {
-  const extensionName = selectedExtension.querySelector(
-    ".extension-item__name"
-  ).textContent;
-  list = list.filter((extension) => extension.name !== extensionName);
+  if (target.classList.contains("js-modal-confirm-btn")) {
+    list = list.filter((extension) => extension.name !== selectedExtension.name);
 
-  modal.classList.add("hide");
-  updateFilteredList();
-  renderList(filteredList);
+    modal.classList.add("hide");
+    updateFilteredList();
+    renderList(filteredList);
+  }
+  if (target.classList.contains("js-modal-cancel-btn")) {
+    modal.classList.add("hide");
+  }
 });
 
 themeToggler.addEventListener("click", toggleTheme);
