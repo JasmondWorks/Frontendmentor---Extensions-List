@@ -87,8 +87,8 @@ function renderRemoveExtensionModal(item) {
   return `
   <div class="modal__content">
     <div class="modal__extension-details">
-      <h3 class="modal__extension-name">${name}</h3>
       <img src="${logo}" alt="devlens logo" />
+      <h3 class="modal__extension-name">${name}</h3>
     </div>
     <button class="modal__close-btn js-modal-close-btn">&times;</button>
     <h2 class="modal__title">
