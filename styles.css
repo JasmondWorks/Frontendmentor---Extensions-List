@@ -126,7 +126,7 @@ html {
 /* ======================================================
    3. THEMES (ONLY VARIABLE OVERRIDES)
 ====================================================== */
-html[data-theme="dark"] {
+body[data-theme="dark"] {
   --color-text-primary: var(--neutral-100);
   --color-text-secondary: var(--neutral-300);
   --color-text-inverse: var(--neutral-900);
@@ -142,13 +142,13 @@ html[data-theme="dark"] {
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-html[data-theme="dark"] .nav__theme-toggler:hover {
+body[data-theme="dark"] .nav__theme-toggler:hover {
   background-color: var(--neutral-600);
 }
-html[data-theme="dark"] .nav__theme-icon--sun {
+body[data-theme="dark"] .nav__theme-icon--sun {
   display: block;
 }
-html[data-theme="dark"] .nav__theme-icon--moon {
+body[data-theme="dark"] .nav__theme-icon--moon {
   display: none;
 }
 .nav__theme-icon--sun {
@@ -231,7 +231,7 @@ body {
   height: auto;
 }
 
-html[data-theme="dark"] .nav__logo path:nth-child(2) {
+body[data-theme="dark"] .nav__logo path:nth-child(2) {
   fill: #fff;
 }
 

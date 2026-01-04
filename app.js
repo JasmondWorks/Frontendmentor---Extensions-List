@@ -5,11 +5,11 @@ const modalCancelBtn = document.querySelector(".js-modal-cancel-btn");
 const modalCloseBtns = document.querySelectorAll(".js-modal-close-btn");
 const modal = document.querySelector(".js-modal");
 const themeToggler = document.querySelector(".js-theme-toggler");
-const root = document.documentElement;
+const body = document.body;
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "dark") {
-  root.setAttribute("data-theme", "dark");
+  body.setAttribute("data-theme", "dark");
 }
 
 let list = [];
@@ -116,29 +116,29 @@ function renderRemoveExtensionModal(item) {
 extensionsList.addEventListener("click", (e) => {
   const target = e.target;
   const item = e.target.closest(".extension-item");
-
+  // Find item in array
+  const itemInArray = list.find((extension => extension.name === item.querySelector(".extension-item__name").textContent));
+  selectedExtension = itemInArray;
+  
   if (target.classList.contains("js-switch-toggler")) {
     const isActive = target.getAttribute("data-active") === "true";
 
     filteredList.map((extension) => {
       if (
         extension.name ===
-        item.querySelector(".extension-item__name").textContent
+        selectedExtension.name
       ) {
         extension.isActive = !isActive;
       }
     });
 
     updateFilteredList();
+    
     renderList(filteredList);
   }
 
   if (target.classList.contains("button") && target.textContent === "Remove") {
     modal.classList.remove("hide");
-    
-    const itemInArray = list.find((extension => extension.name === item.querySelector(".extension-item__name").textContent));
-    selectedExtension = itemInArray;
-
     modal.innerHTML = renderRemoveExtensionModal(itemInArray);
   }
 });
@@ -198,13 +198,13 @@ modal.addEventListener("click", (e) => {
 themeToggler.addEventListener("click", toggleTheme);
 
 function toggleTheme() {
-  const isDark = root.getAttribute("data-theme") === "dark";
+  const isDark = body.getAttribute("data-theme") === "dark";
 
   if (isDark) {
-    root.removeAttribute("data-theme");
+    body.removeAttribute("data-theme");
     localStorage.removeItem("theme");
   } else {
-    root.setAttribute("data-theme", "dark");
+    body.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
   }
 }
